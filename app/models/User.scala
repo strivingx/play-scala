@@ -1,12 +1,3 @@
 package models
 
-import play.api.libs.json.Json
-
-case class User(var username: String, var password: String)   {
-}
-
-object User{
-
-    implicit val userFormat = Json.format[User]
-
-}
+case class User(username: String, password: String, mail: Option[String] = None, gender: Option[Boolean] = None, age: Option[Int] = None)

@@ -1,0 +1,12 @@
+权限管理
+状态管理：审核等
+操作记录管理
+
+过滤器
+依赖注入
+
+debug调试
+
+slick:
+https://www.playframework.com/documentation/2.6.x/PlaySlick
+https://www.playframework.com/documentation/2.6.x/Evolutions
