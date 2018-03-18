@@ -9,6 +9,7 @@ import play.api.data.Forms._
 import play.api.libs.json.Json
 import play.api.mvc._
 import services.UserService
+import utils.Util
 
 import scala.collection.JavaConversions._
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -71,9 +72,12 @@ class UserController @Inject()(userService: UserService) extends Controller {
     }
   }
 
-  def getUsers(page: Option[Int], page_size: Option[Int], sortby: Option[String], order: Option[String]) = Action.async {
-    userService.getUsers().map { users =>
-      Ok(Json.obj("users" -> Json.toJson(users.toList)))
+  def getUsersByRequest(pageNum: Option[Int], pageSize: Option[Int], sortBy: Option[String], order: Option[String]) = Action.async {
+    val request = Util.toUserRequest(pageNum, pageSize)
+    userService.getUserCountByRequest(request).flatMap { count =>
+      userService.getUsersByRequest(request).map { users =>
+        Ok( Util.toPageJsValue(Json.obj("users" -> users.toList), count, request.pageNum, request.pageSize))
+      }
     }
   }
 

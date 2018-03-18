@@ -10,7 +10,7 @@ GET     /count                      controllers.CountController.count
 GET     /message                    controllers.AsyncController.message
 
 GET     /api/user/v1/users/$username<[\w|\.|-]+>                    controllers.UserController.getUserByUsername(username: String)
-GET     /api/user/v1/users                    controllers.UserController.getUsers(page: Option[Int], page_size: Option[Int], sortby: Option[String], order: Option[String])
+GET     /api/user/v1/users                    controllers.UserController.getUsersByRequest(page: Option[Int], page_size: Option[Int], sortby: Option[String], order: Option[String])
 # PATCH     /api/user/v1/users                    controllers.UserController.getUsers
 POST     /api/user/v1/users                    controllers.UserController.registerUser()
 PUT     /api/user/v1/users/$userId<[\w|\.|-]+>                    controllers.UserController.updateUser(userId: String)

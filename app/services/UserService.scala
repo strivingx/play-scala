@@ -1,6 +1,7 @@
 package services
 
 import models.User
+import models.cases.UserRequest
 
 import scala.concurrent.Future
 
@@ -12,8 +13,10 @@ trait UserService {
 
   def deleteUser(userId: String): Future[Int]
 
-  def getUserByUsername(username: String) : Future[User]
+  def getUserByUsername(username: String): Future[User]
 
-  def getUsers(): Future[java.util.List[User]]
+  def getUsersByRequest(request: UserRequest): Future[java.util.List[User]]
+
+  def getUserCountByRequest(request: UserRequest): Future[Int]
 
 }

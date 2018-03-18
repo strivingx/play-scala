@@ -37,4 +37,16 @@ class UserDao {
     db.run(TUser.to[List].result).map(_.map(row2User))
   }
 
+  def getUsersByRequest(offset: Int, limit: Int): Future[util.List[User]] = {
+    db.run(TUser.drop(offset).take(limit).to[List].result).map(_.map(row2User))
+  }
+
+  def getUserCount(): Future[Int] = {
+    db.run(TUser.size.result)
+  }
+
+  def getUserCountByRequest(): Future[Int] = {
+    db.run(TUser.size.result)
+  }
+
 }
