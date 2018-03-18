@@ -15,9 +15,7 @@ class IndexController @Inject() extends Controller {
     }
 
     def forward = Action {
-        val user = new User("yyy", "yyypwd")
-        val users = List(user,user,user)
-        Ok(Json.obj("user" -> Json.toJson(users)))
+        Ok(Json.obj())
     }
 
 }
