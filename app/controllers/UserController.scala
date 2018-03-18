@@ -15,14 +15,15 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 @Singleton
-class UserController @Inject() extends Controller {
-  val userService = new UserService
+class UserController @Inject()(userService: UserService) extends Controller {
 
   def before(): Unit = {
   }
 
-  def getUser(userId: String) = Action {
-    Ok(Json.obj("user" -> ""))
+  def getUserByUsername(username: String) = Action.async {
+    userService.getUserByUsername(username).map { user =>
+      Ok(Json.obj("user" -> user))
+    }
   }
 
   case class JsonRequest(username: String)

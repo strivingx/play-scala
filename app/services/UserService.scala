@@ -1,32 +1,19 @@
 package services
 
-import daos.UserDao
 import models.User
 
 import scala.concurrent.Future
 
-class UserService {
-  private val dao = new UserDao
+trait UserService {
 
-  def createUser(user: User) = {
-    dao.insertUser(user)
-  }
+  def createUser(user: User): Future[Int]
 
-  def updateUser(user: User) = {
+  def updateUser(user: User): Future[Int]
 
-  }
+  def deleteUser(userId: String): Future[Int]
 
-  def deleteUser(userId: String): Future[Int] = {
-    dao.deleteUser(userId)
-  }
+  def getUserByUsername(username: String) : Future[User]
 
-
-  def getUser(user: User) = {
-
-  }
-
-  def getUsers(): Future[java.util.List[User]] = {
-    dao.getUsers()
-  }
+  def getUsers(): Future[java.util.List[User]]
 
 }

@@ -4,7 +4,7 @@ import javax.inject.{Inject, Provider}
 import com.google.inject.AbstractModule
 import com.typesafe.config.Config
 import play.api.Configuration
-import services.{ApplicationTimer, AtomicCounter, Counter}
+import services._
 
 /**
   * This class is a Guice module that tells Guice how to bind several
@@ -32,7 +32,7 @@ class Module extends AbstractModule {
     // Set AtomicCounter as the implementation for Counter.
     bind(classOf[Counter]).to(classOf[AtomicCounter])
     bind(classOf[Config]).toProvider(classOf[ConfigProvider])
-
+    bind(classOf[UserService]).to(classOf[UserServiceImpl])
   }
 
 }
