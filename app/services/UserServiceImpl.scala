@@ -1,8 +1,7 @@
 package services
 
 import daos.UserDao
-import models.User
-import models.cases.UserRequest
+import models.cases.{User, UserRequest, UserSimpleInfo}
 
 import scala.concurrent.Future
 
@@ -29,6 +28,12 @@ class UserServiceImpl extends UserService {
     val limit = request.pageSize
     val offset = (limit * (request.pageNum - 1))
     dao.getUsersByRequest(offset, limit)
+  }
+
+  override def getUserSimpleInfosByRequest(request: UserRequest): Future[java.util.List[UserSimpleInfo]] = {
+    val limit = request.pageSize
+    val offset = (limit * (request.pageNum - 1))
+    dao.getUserSimpleInfosByRequest(offset, limit)
   }
 
   override def getUserCountByRequest(request: UserRequest): Future[Int] = {

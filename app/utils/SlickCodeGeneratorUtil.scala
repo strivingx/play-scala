@@ -9,6 +9,8 @@ object SlickCodeGeneratorUtil extends App {
   val slickDriver = "slick.jdbc.MySQLProfile"
   val jdbcDriver = "com.mysql.jdbc.Driver"
   val url = "jdbc:mysql://localhost:3306/test?searchpath=public"
+  //     val url = "jdbc:h2:mem:test;INIT=runscript from 'study/main/sql/create1.sql'" //加载sql文件
+
   val user = "root"
   val password = "root"
   val outputFolder = "d:/"
