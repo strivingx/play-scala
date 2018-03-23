@@ -2,7 +2,7 @@ package controllers
 
 import javax.inject._
 
-import models.User
+import models.cases.{User, UserSimpleInfo}
 import models.formats._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -17,7 +17,8 @@ import scala.concurrent.Future
 
 @Singleton
 class UserController @Inject()(userService: UserService) extends Controller {
-
+  implicit val userFormat = Json.format[User]
+  implicit val userSimpleInfoFormat = Json.format[UserSimpleInfo]
   def before(): Unit = {
   }
 
@@ -75,8 +76,15 @@ class UserController @Inject()(userService: UserService) extends Controller {
   def getUsersByRequest(pageNum: Option[Int], pageSize: Option[Int], sortBy: Option[String], order: Option[String]) = Action.async {
     val request = Util.toUserRequest(pageNum, pageSize)
     userService.getUserCountByRequest(request).flatMap { count =>
-      userService.getUsersByRequest(request).map { users =>
-        Ok( Util.toPageJsValue(Json.obj("users" -> users.toList), count, request.pageNum, request.pageSize))
+      if (count > 0) {
+        (request.is_list match {
+          case true => userService.getUsersByRequest(request).map(_.map(Json.toJson(_)))
+          case false => userService.getUserSimpleInfosByRequest(request).map(_.map(Json.toJson(_)))
+        }).map { userJson =>
+          Ok(Json.obj("result" -> Util.toPageJsValue(Json.obj("users" -> userJson), count, request.pageNum, request.pageSize)))
+        }
+      } else {
+        Future.successful(Ok(""))
       }
     }
   }
