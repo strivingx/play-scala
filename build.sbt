@@ -18,3 +18,19 @@ libraryDependencies ++= Seq(
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.27"
 libraryDependencies += "com.typesafe.play" %% "play-mailer" % "6.0.1"
 libraryDependencies += "com.typesafe.play" %% "play-mailer-guice" % "6.0.1"
+
+
+
+// https://mvnrepository.com/artifact/org.apache.spark/spark-core
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.3.0"
+// https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver
+// libraryDependencies += "org.mongodb" % "mongo-java-driver" % "3.6.3"
+
+// https://mvnrepository.com/artifact/redis.clients/jedis
+// libraryDependencies += "redis.clients" % "jedis" % "2.9.0"
+
+dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-core" % "2.9.4"
+dependencyOverrides += "com.fasterxml.jackson.core" % "jackson-databind" % "2.9.4"
+
+// https://mvnrepository.com/artifact/com.fasterxml/jackson-module-scala
+dependencyOverrides += "com.fasterxml" % "jackson-module-scala" % "1.9.3"
