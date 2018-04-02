@@ -11,7 +11,7 @@ object CacheUtil extends Logging{
   private def getUserIdByUsername(username: String): java.lang.Long = {
     usernameToIds.get(username, new Callable[java.lang.Long] {
       override def call(): java.lang.Long = {
-        val userId = 1
+        val userId = 1L
         log.debug(s"getUserIdByUsername by cache. username: $username, userId: $userId")
         userId
       }

@@ -1,5 +1,7 @@
 package utils
 
+import java.text.SimpleDateFormat
+
 import models.cases.UserRequest
 import play.api.libs.json.{JsObject, JsValue, Json}
 object Util {
@@ -8,7 +10,11 @@ object Util {
     val (num, size) = (pageNum.getOrElse(ConfigUtil.getDefaultPageNum), pageSize.getOrElse(ConfigUtil.getDefaultPageSize))
     new UserRequest(num, size)
   }
+
   def toPageJsValue(data: JsObject, totalCount: Int, pageNum: Int, pageSize: Int): JsValue = {
     data ++ Json.obj("total_count" -> totalCount, "page_num" -> pageNum, "page_size" -> pageSize)
   }
+
+  val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") //等价于now.toLocaleString()
+
 }

@@ -18,3 +18,4 @@ libraryDependencies ++= Seq(
 libraryDependencies += "mysql" % "mysql-connector-java" % "5.1.27"
 libraryDependencies += "com.typesafe.play" %% "play-mailer" % "6.0.1"
 libraryDependencies += "com.typesafe.play" %% "play-mailer-guice" % "6.0.1"
+libraryDependencies += "org.apache.zookeeper" % "zookeeper" % "3.5.3-beta"
