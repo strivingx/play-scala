@@ -18,4 +18,4 @@ libraryDependencies += "com.typesafe.play" %% "play-mailer" % "6.0.1"
 libraryDependencies += "com.typesafe.play" %% "play-mailer-guice" % "6.0.1"
 libraryDependencies += "org.apache.zookeeper" % "zookeeper" % "3.5.3-beta"
 libraryDependencies += "ai.x" %% "play-json-extensions" % "0.10.0"
->>>>>>> 84c31374175e3707b184263d7bd8dece04f56c29
+libraryDependencies += "com.typesafe.akka" % "akka-actor_2.11" % "2.5.3"

@@ -15,9 +15,6 @@ object Util {
     data ++ Json.obj("total_count" -> totalCount, "page_num" -> pageNum, "page_size" -> pageSize)
   }
 
-<<<<<<< HEAD
-=======
   val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") //等价于now.toLocaleString()
->>>>>>> 84c31374175e3707b184263d7bd8dece04f56c29
 
 }

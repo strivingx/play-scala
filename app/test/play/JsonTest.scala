@@ -1,7 +1,6 @@
-package test
+package test.play
 
 import ai.x.play.json.Jsonx
-import org.apache.zookeeper.client.ZKClientConfig
 import play.api.libs.json.Json
 
 /*

@@ -1,8 +1,6 @@
-package test
+package test.zookeeper
 
-import org.apache.zookeeper.ZooDefs.Ids
 import org.apache.zookeeper.client.ZKClientConfig
-import org.apache.zookeeper.{CreateMode, WatchedEvent, Watcher, ZooKeeper}
 
 /*
  ubuntu配置https://blog.csdn.net/Yan_Chou/article/details/53322429
