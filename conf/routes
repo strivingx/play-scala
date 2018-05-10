@@ -17,5 +17,17 @@ PUT     /api/user/v1/users/$userId<[\w|\.|-]+>                    controllers.Us
 DELETE     /api/user/v1/users/$userId<[\w|\.|-]+>                    controllers.UserController.deleteUser(userId: String)
 # HEAD     /api/user/v1/users                    controllers.UserController.getUsers()
 
+
+
+GET     /api/bookstore/v1/books/$bookId<[\w|\.|-]+>     controllers.BookController.getBookById(bookId: Long)
+GET     /api/bookstore/v1/books                    controllers.BookController.getUsersByRequest(page: Option[Int], page_size: Option[Int], sortby: Option[String], order: Option[String])
+# PATCH     /api/bookstore/v1/books                    controllers.BookController.getUsers
+POST     /api/bookstore/v1/books                    controllers.BookController.saveBook(bookId = 0)
+PUT     /api/bookstore/v1/books/$bookId<[\w|\.|-]+>                    controllers.BookController.updateBook(bookId: String)
+DELETE     /api/bookstore/v1/books/$bookId<[\w|\.|-]+>                    controllers.BookController.deleteBook(bookId: String)
+# HEAD     /api/user/v1/users                    controllers.UserController.getUsers()
+
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

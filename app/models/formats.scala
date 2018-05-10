@@ -8,6 +8,9 @@ object formats {
   implicit val userFormat = Json.format[User]
   implicit val userSimpleInfoFormat = Json.format[UserSimpleInfo]
 
+  implicit val bookFormat = Json.format[Book]
+  implicit val userListInfoFormat = Json.format[BookListInfo]
+
   implicit def row2User(row: TUserRow) = new User(row.username, row.password)
 
   implicit def row2UserSimpleInfo(row: TUserRow) = new UserSimpleInfo(row.username)

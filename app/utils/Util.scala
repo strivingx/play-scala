@@ -11,8 +11,8 @@ object Util {
     new UserRequest(num, size)
   }
 
-  def toPageJsValue(data: JsObject, totalCount: Int, pageNum: Int, pageSize: Int): JsValue = {
-    data ++ Json.obj("total_count" -> totalCount, "page_num" -> pageNum, "page_size" -> pageSize)
+  def toPageJsValue(data: JsObject, totalCount: Int, pageNum: Option[Int], pageSize: Option[Int]): JsValue = {
+    data ++ Json.obj("total_count" -> totalCount, "page_num" -> pageNum.getOrElse(1), "page_size" -> pageSize.getOrElse(totalCount))
   }
 
   val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") //等价于now.toLocaleString()

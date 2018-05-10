@@ -26,6 +26,11 @@ object MyBuild extends Build with JavaAppKeys {
       "com.typesafe.slick" %% "slick" % slick_version,
       "com.typesafe.slick" %% "slick-codegen" % slick_version
     )
+    // https://mvnrepository.com/artifact/org.apache.thrift/libthrift
+    val thrift = "org.apache.thrift" % "libthrift" % "0.11.0"
+    // https://mvnrepository.com/artifact/com.facebook.nifty/nifty-core
+    val nifty = "com.facebook.nifty" % "nifty-core" % "0.23.0"
+
   }
 
   lazy val root = (project in file(".")).enablePlugins(PlayScala)
@@ -40,7 +45,9 @@ object MyBuild extends Build with JavaAppKeys {
             Deps.scala_test,
             Deps.akka,
             Deps.play_json,
-            Deps.zookeeper
+            Deps.zookeeper,
+            Deps.thrift,
+            Deps.nifty
           ) ++ Deps.slick
         )
 

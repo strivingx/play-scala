@@ -19,8 +19,6 @@ import scala.concurrent.Future
 class UserController @Inject()(userService: UserService) extends Controller {
   implicit val userFormat = Json.format[User]
   implicit val userSimpleInfoFormat = Json.format[UserSimpleInfo]
-  def before(): Unit = {
-  }
 
   def getUserByUsername(username: String) = Action.async {
     userService.getUserByUsername(username).map { user =>
