@@ -1,6 +1,6 @@
 import com.typesafe.sbt.packager.archetypes.JavaAppKeys
 import play.routes.compiler.InjectedRoutesGenerator
-import play.sbt.PlayImport.{ws, _}
+import play.sbt.PlayImport._
 import play.sbt.PlayScala
 import play.sbt.routes.RoutesKeys.routesGenerator
 import sbt.Keys._
@@ -31,6 +31,12 @@ object MyBuild extends Build with JavaAppKeys {
     // https://mvnrepository.com/artifact/com.facebook.nifty/nifty-core
     val nifty = "com.facebook.nifty" % "nifty-core" % "0.23.0"
 
+    val h2database = "com.h2database" % "h2" % "1.4.197" % Test
+
+    val scalatest = "org.scalatest" % "scalatest_2.12" % "3.0.5" % "test"
+
+    val mockito = "org.mockito" % "mockito-core" % "2.18.3" % Test
+
   }
 
   lazy val root = (project in file(".")).enablePlugins(PlayScala)
@@ -47,7 +53,9 @@ object MyBuild extends Build with JavaAppKeys {
             Deps.play_json,
             Deps.zookeeper,
             Deps.thrift,
-            Deps.nifty
+            Deps.nifty,
+            Deps.h2database,
+            Deps.mockito
           ) ++ Deps.slick
         )
 

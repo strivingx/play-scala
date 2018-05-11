@@ -1,4 +1,4 @@
-package test
+package test.secret
 
 import java.net.{URLDecoder, URLEncoder}
 

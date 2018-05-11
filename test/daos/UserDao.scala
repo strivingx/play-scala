@@ -6,7 +6,7 @@ import models.Tables._
 import models.cases.{User, UserSimpleInfo}
 import models.formats._
 import slick.jdbc.MySQLProfile.api._
-import utils.DBUtil.UserDB._
+import utils.DBUtil._
 
 import scala.collection.JavaConversions._
 import scala.concurrent.ExecutionContext.Implicits.global
