@@ -108,7 +108,10 @@ object MyBuild extends Build with JavaAppKeys {
             )
 
     def excludedDeps(deps: ModuleID*) = {
-        deps.toSeq
-        //        _.exclude("org.jboss.netty", "netty")
+        deps.toSeq map {
+            _.exclude("org.antlr", "stringtemplate")
+                    .exclude("org.antlr", "antlr-runtime")
+                    .exclude("org.slf4j", "slf4j-log4j12")
+        }
     }
 }
