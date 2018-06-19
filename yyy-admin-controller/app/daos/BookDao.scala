@@ -1,20 +1,21 @@
+/*
 package daos
 
 import java.util
 
 import models.Tables._
-import models.cases.{User, UserSimpleInfo}
+import models.cases.{Book, User, UserSimpleInfo}
 import models.formats._
 import slick.jdbc.MySQLProfile.api._
-import utils.DBUtil.UserDB._
+import utils.DBUtil._
 
-import scala.collection.JavaConversions._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-class UserDao {
 
-  def insertUser(user: User): Future[Int] = {
-    db.run(TUser.map(p => (p.username, p.password)).forceInsert((user.username, user.password)))
+class BookDao {
+
+  def insertBook(book: Book): Future[Int] = {
+    db.run(TBook.map(p => (p.age, p.password)).forceInsert((book.username, book.password)))
   }
 
   def updateUser(user: User): Future[Int] = {
@@ -54,3 +55,4 @@ class UserDao {
   }
 
 }
+*/

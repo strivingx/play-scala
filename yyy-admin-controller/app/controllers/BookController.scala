@@ -1,3 +1,4 @@
+/*
 package controllers
 
 import javax.inject._
@@ -65,3 +66,4 @@ class BookController @Inject()(bookService: BookService) extends Controller {
   }
 
 }
+*/

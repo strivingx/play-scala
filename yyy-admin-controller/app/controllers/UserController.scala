@@ -79,7 +79,7 @@ class UserController @Inject()(userService: UserService) extends Controller {
           case true => userService.getUsersByRequest(request).map(_.map(Json.toJson(_)))
           case false => userService.getUserSimpleInfosByRequest(request).map(_.map(Json.toJson(_)))
         }).map { userJson =>
-          Ok(Json.obj("result" -> Util.toPageJsValue(Json.obj("users" -> userJson), count, request.pageNum, request.pageSize)))
+          Ok(Json.obj("result" -> Util.toPageJsValue(Json.obj("users" -> userJson), count, Option(request.pageNum), Option(request.pageSize))))
         }
       } else {
         Future.successful(Ok(""))

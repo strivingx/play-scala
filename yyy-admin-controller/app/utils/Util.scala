@@ -12,7 +12,7 @@ object Util {
   }
 
   def toPageJsValue(data: JsObject, totalCount: Int, pageNum: Option[Int], pageSize: Option[Int]): JsValue = {
-    data ++ Json.obj("total_count" -> totalCount, "page_num" -> pageNum.getOrElse(1), "page_size" -> pageSize.getOrElse(totalCount))
+    data ++ Json.obj("total_count" -> totalCount, "page_num" -> pageNum.getOrElse(1).toInt, "page_size" -> pageSize.getOrElse(totalCount).toInt)
   }
 
   val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") //等价于now.toLocaleString()
