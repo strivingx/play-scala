@@ -1,4 +1,4 @@
-package test.scala
+package scalatest
 
 object FunctionProgram extends App {
   def fun(a: Int): Int = {

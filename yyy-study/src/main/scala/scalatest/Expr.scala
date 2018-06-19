@@ -1,4 +1,4 @@
-package test.scala
+package scalatest
 
 abstract class Expr
 

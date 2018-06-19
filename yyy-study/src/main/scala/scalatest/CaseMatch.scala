@@ -1,4 +1,4 @@
-package test.scala
+package scalatest
 
 object CaseMatch extends  App {
   val hi = Array("hi", "hello", "world")

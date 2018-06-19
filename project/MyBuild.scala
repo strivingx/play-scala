@@ -39,57 +39,45 @@ object MyBuild extends Build with JavaAppKeys {
     }
 
     lazy val `yyy-shared` = baseProject("yyy-shared")
-            .settings(
-                libraryDependencies ++= excludedDeps(
-                    ws
-                ) ++ Seq(
-                )
+            .settings(libraryDependencies ++= excludedDeps(
+                ws
+            ) ++ Seq(
+            )
             )
 
-    lazy val `yyy-admin-controller` = (project in file("yyy-admin-controller"))
+    lazy val `yyy-test` = baseProject("yyy-test")
             .dependsOn(`yyy-shared`)
-            .enablePlugins(PlayScala)
-            .settings(
-                name := "yyy-admin-controller",
-                libraryDependencies ++=
-                        excludedDeps(
-                            jdbc,
-                            cache,
-                            ws,
-                            Deps.mysql,
-                            //            Deps.mongodb,
-                            Deps.redis,
-                            Deps.scala_test,
-                            // Deps.akka,
-                            Deps.play_json,
-                            Deps.zookeeper,
-                            Deps.thrift,
-                            Deps.nifty,
-                            Deps.h2database,
-                            Deps.mockito
-                        ) ++ Deps.slick,
-                routesGenerator := InjectedRoutesGenerator
+            .settings(libraryDependencies ++=
+                    excludedDeps(
+                    )
+            )
+
+    lazy val `yyy-spark` = baseProject("yyy-spark")
+            .dependsOn(`yyy-shared`)
+            .settings(libraryDependencies ++=
+                    excludedDeps(
+                    )
+            )
+
+    lazy val `yyy-study` = baseProject("yyy-study")
+            .dependsOn(`yyy-shared`)
+            .settings(libraryDependencies ++=
+                    excludedDeps(
+                    )
+            )
+
+    lazy val `yyy-admin-controller` = playProject("yyy-admin-controller")
+            .dependsOn(`yyy-shared`)
+            .settings(libraryDependencies ++=
+                    excludedDeps(
+                    )
             )
 
     lazy val root = (project in file(".")).enablePlugins(PlayScala)
-            .settings(
-                libraryDependencies ++= Seq(
-                    jdbc,
-                    cache,
-                    ws,
-                    Deps.mysql,
-                    //            Deps.mongodb,
-                    Deps.redis,
-                    Deps.scala_test,
-                    // Deps.akka,
-                    Deps.play_json,
-                    Deps.zookeeper,
-                    Deps.thrift,
-                    Deps.nifty,
-                    Deps.h2database,
-                    Deps.mockito
-                ) ++ Deps.slick
-            ).aggregate(`yyy-admin-controller`)
+            .aggregate(`yyy-admin-controller`)
+            .aggregate(`yyy-test`)
+            .aggregate(`yyy-study`)
+            .aggregate(`yyy-spark`)
 
     def playProject(projectName: String) = baseProject(projectName)
             .enablePlugins(PlayScala)
@@ -100,8 +88,23 @@ object MyBuild extends Build with JavaAppKeys {
     def baseProject(projectName: String) = Project(projectName, file(projectName))
             .settings(
                 name := projectName,
-                libraryDependencies ++= excludedDeps(
-                )
+                libraryDependencies ++=
+                        excludedDeps(
+                            jdbc,
+                            cache,
+                            ws,
+                            Deps.mysql,
+                            // Deps.mongodb,
+                            Deps.redis,
+                            Deps.scala_test,
+                            // Deps.akka,
+                            Deps.play_json,
+                            Deps.zookeeper,
+                            Deps.thrift,
+                            Deps.nifty,
+                            Deps.h2database,
+                            Deps.mockito
+                        ) ++ Deps.slick
             )
 
     def excludedDeps(deps: ModuleID*) = {

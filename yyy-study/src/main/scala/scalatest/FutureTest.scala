@@ -1,4 +1,4 @@
-package test.scala
+package scalatest
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
