@@ -2,23 +2,20 @@ package controllers
 
 import javax.inject._
 
-import models.cases.{User, UserSimpleInfo}
-import models.formats._
+import models.cases._
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
 import play.api.mvc._
 import services.UserService
-import utils.Util
+import utils.Util._
 
-import scala.collection.JavaConversions._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 @Singleton
 class UserController @Inject()(userService: UserService) extends Controller {
   implicit val userFormat = Json.format[User]
-  implicit val userSimpleInfoFormat = Json.format[UserSimpleInfo]
 
   def getUserByUsername(username: String) = Action.async {
     userService.getUserByUsername(username).map { user =>
@@ -44,7 +41,7 @@ class UserController @Inject()(userService: UserService) extends Controller {
 
   case class RegisterUserDTO(username: String, password: String) {
     def toUser(): User = {
-      new User(username = username, password = password)
+      new User(user_id = "", username = username, password = password)
     }
   }
 
@@ -54,7 +51,7 @@ class UserController @Inject()(userService: UserService) extends Controller {
         Future.successful(Ok(Json.obj("result" -> "failed")))
       },
       form => {
-        userService.createUser(form.toUser()).map { r =>
+        userService.saveUser(form.toUser()).map { r =>
           Ok(Json.obj("result" -> "add user success"))
         }
       }
@@ -72,18 +69,9 @@ class UserController @Inject()(userService: UserService) extends Controller {
   }
 
   def getUsersByRequest(pageNum: Option[Int], pageSize: Option[Int], sortBy: Option[String], order: Option[String]) = Action.async {
-    val request = Util.toUserRequest(pageNum, pageSize)
-    userService.getUserCountByRequest(request).flatMap { count =>
-      if (count > 0) {
-        (request.is_list match {
-          case true => userService.getUsersByRequest(request).map(_.map(Json.toJson(_)))
-          case false => userService.getUserSimpleInfosByRequest(request).map(_.map(Json.toJson(_)))
-        }).map { userJson =>
-          Ok(Json.obj("result" -> Util.toPageJsValue(Json.obj("users" -> userJson), count, Option(request.pageNum), Option(request.pageSize))))
-        }
-      } else {
-        Future.successful(Ok(""))
-      }
+    val request = toUserRequest(pageNum, pageSize)
+    userService.getUserPageInfoByRequest(request).map { info =>
+      Ok(Json.obj("users" -> info.users))
     }
   }
 

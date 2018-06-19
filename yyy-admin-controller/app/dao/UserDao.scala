@@ -1,14 +1,11 @@
-package daos
-
-import java.util
+package dao
 
 import models.Tables._
-import models.cases.{User, UserSimpleInfo}
-import models.formats._
+import models.cases._
 import slick.jdbc.MySQLProfile.api._
 import utils.DBUtil._
+import utils.PageUtil.PageQueryInfo
 
-import scala.collection.JavaConversions._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 class UserDao {
@@ -19,8 +16,8 @@ class UserDao {
 
   def updateUser(user: User): Future[Int] = {
     db.run(TUser.filter(_.username === user.username)
-      .map(p => (p.username, p.username))
-      .update((user.username, user.username)))
+            .map(p => (p.username, p.username))
+            .update((user.username, user.username)))
   }
 
   def deleteUser(username: String): Future[Int] = {
@@ -33,24 +30,20 @@ class UserDao {
     }.to[List].result.head).map(row2User)
   }
 
-  def getUsers(): Future[util.List[User]] = {
-    db.run(TUser.to[List].result).map(_.map(row2User))
+  def getUserQuery() = {
+    val query = TUser.subquery
+    query
   }
 
-  def getUsersByRequest(offset: Int, limit: Int): Future[util.List[User]] = {
-    db.run(TUser.drop(offset).take(limit).to[List].result).map(_.map(row2User))
-  }
-
-  def getUserSimpleInfosByRequest(offset: Int, limit: Int): Future[util.List[UserSimpleInfo]] = {
-    db.run(TUser.drop(offset).take(limit).to[List].result).map(_.map(row2UserSimpleInfo))
-  }
-
-  def getUserCount(): Future[Int] = {
-    db.run(TUser.size.result)
+  def getUsersByRequest()(implicit info: PageQueryInfo = PageQueryInfo()): Future[List[User]] = {
+    var query = getUserQuery()
+    if (info.offset > 0) query = query.drop(info.offset)
+    if (info.pageSize > 0) query = query.take(info.pageSize)
+    db.run(getUserQuery().to[List].result).map(_.map(row2User))
   }
 
   def getUserCountByRequest(): Future[Int] = {
-    db.run(TUser.size.result)
+    db.run(getUserQuery.size.result)
   }
 
 }

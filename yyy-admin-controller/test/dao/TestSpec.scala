@@ -1,4 +1,4 @@
-package daos
+package dao
 
 
 object TestSpec extends App {

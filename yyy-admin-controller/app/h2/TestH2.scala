@@ -1,4 +1,4 @@
-package db.h2
+package h2
 
 import java.sql.{DriverManager, ResultSet}
 

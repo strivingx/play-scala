@@ -2,13 +2,13 @@ package utils
 
 import java.text.SimpleDateFormat
 
-import models.cases.UserRequest
+import models.cases.RpcRequest
 import play.api.libs.json._
 object Util {
 
-  def toUserRequest(pageNum: Option[Int], pageSize: Option[Int]): UserRequest = {
+  def toUserRequest(pageNum: Option[Int], pageSize: Option[Int]): RpcRequest = {
     val (num, size) = (pageNum.getOrElse(ConfigUtil.getDefaultPageNum), pageSize.getOrElse(ConfigUtil.getDefaultPageSize))
-    new UserRequest(num, size)
+    new RpcRequest(num, size)
   }
 
   def toPageJsValue(data: JsObject, totalCount: Int, pageNum: Option[Int], pageSize: Option[Int]): JsValue = {
