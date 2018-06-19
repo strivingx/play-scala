@@ -3,7 +3,7 @@ package utils
 import java.text.SimpleDateFormat
 
 import models.cases.UserRequest
-import play.api.libs.json.{JsObject, JsValue, Json}
+import play.api.libs.json._
 object Util {
 
   def toUserRequest(pageNum: Option[Int], pageSize: Option[Int]): UserRequest = {

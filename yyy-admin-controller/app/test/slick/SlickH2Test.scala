@@ -7,8 +7,9 @@ import scala.concurrent.Await
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.duration.Duration
 import test.slick.SlickTable._
+import SlickUtil.db
+
 object SlickH2Test extends App {
-    val db = SlickUtil.db
     SlickUtil.init
     try {
         println("Coffees:")
