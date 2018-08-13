@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject._
 
+import commons.Logging
 import models.cases._
 import play.api.data.Form
 import play.api.data.Forms._
@@ -14,7 +15,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 @Singleton
-class UserController @Inject()(userService: UserService) extends Controller {
+class UserController @Inject()(userService: UserService) extends Controller with Logging{
   implicit val userFormat = Json.format[User]
 
   def getUserByUsername(username: String) = Action.async {

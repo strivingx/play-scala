@@ -1,10 +1,10 @@
-package models
+package modules
 
 import java.time.Clock
 
 import com.google.inject.AbstractModule
 import play.api.libs.concurrent.AkkaGuiceSupport
-import services.{ApplicationTimer, AtomicCounter, Counter}
+import services.{AtomicCounter, Counter}
 import utils.{DatabaseProvider, DatabaseProviderImpl}
 
 /**
@@ -17,7 +17,7 @@ import utils.{DatabaseProvider, DatabaseProviderImpl}
   * adding `play.modules.enabled` settings to the `application.conf`
   * configuration file.
   */
-class Module extends AbstractModule with AkkaGuiceSupport{
+class MyModule extends AbstractModule with AkkaGuiceSupport{
 
     override def configure() = {
         // Use the system clock as the default implementation of Clock

@@ -1,10 +1,10 @@
-package h2
+package test
 
 import java.sql.{DriverManager, ResultSet}
 
-object TestH2  extends App {
+object TestH2 extends App {
 
-    def printlnRS(rs: ResultSet, msg:String = ""): Unit = {
+    def printlnRS(rs: ResultSet, msg: String = ""): Unit = {
         println(msg)
         while (rs.next) {
             val count = rs.getMetaData.getColumnCount

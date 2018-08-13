@@ -1,31 +1,30 @@
 package services
 
-import dao.UserDao
 import models.cases._
 import org.apache.commons.lang3.StringUtils
+import utils.DatabaseProvider
 import utils.PageUtil._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-class UserServiceImpl extends UserService {
-  private val dao = new UserDao
+class UserServiceImpl(provider: DatabaseProvider) extends BaseServiceImpl(provider) with UserService {
 
   override def saveUser(user: User): Future[String] = {
     if (StringUtils.isBlank(user.user_id)) {
       val userId = "id"
-      dao.insertUser(user).map(_ => "")
+      userDao.insertUser(user).map(_ => "")
     } else {
-      dao.updateUser(user).map(_ => "")
+      userDao.updateUser(user).map(_ => "")
     }
   }
 
   override def deleteUser(userId: String): Future[Boolean] = {
-    dao.deleteUser(userId).map(_ > 0)
+    userDao.deleteUser(userId).map(_ > 0)
   }
 
   override def getUserByUsername(username: String) = {
-    dao.getUserByUsername(username)
+    userDao.getUserByUsername(username)
   }
 
   override def getUserPageInfoByRequest(request: RpcRequest): Future[PageInfo] = {
@@ -34,11 +33,11 @@ class UserServiceImpl extends UserService {
   }
 
   private def getUsersByRequest(request: RpcRequest)(implicit info: PageQueryInfo): Future[List[User]] = {
-    dao.getUsersByRequest()
+    userDao.getUsersByRequest()
   }
 
   private def getUserCountByRequest(request: RpcRequest)(implicit info: PageQueryInfo): Future[Long] = {
-    dao.getUserCountByRequest().map(_.toLong)
+    userDao.getUserCountByRequest().map(_.toLong)
   }
 
 }

@@ -3,13 +3,14 @@ package dao
 import models.Tables._
 import models.cases._
 import slick.jdbc.MySQLProfile.api._
-import utils.DBUtil._
+import utils.DatabaseProvider
 import utils.PageUtil.PageQueryInfo
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-class UserDao {
+class UserDao(provider: DatabaseProvider) {
 
+  val db = provider.getDatabase()
   def insertUser(user: User): Future[Int] = {
     db.run(TUser.map(p => (p.username, p.password)).forceInsert((user.username, user.password)))
   }

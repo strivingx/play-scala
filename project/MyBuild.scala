@@ -39,14 +39,6 @@ object MyBuild extends Build with JavaAppKeys {
     }
 
     lazy val `yyy-shared` = baseProject("yyy-shared")
-            .settings(libraryDependencies ++= excludedDeps(
-                ws
-            ) ++ Seq(
-            )
-            )
-
-    lazy val `yyy-test` = baseProject("yyy-test")
-            .dependsOn(`yyy-shared`)
             .settings(libraryDependencies ++=
                     excludedDeps(
                     )
@@ -75,7 +67,6 @@ object MyBuild extends Build with JavaAppKeys {
 
     lazy val root = (project in file(".")).enablePlugins(PlayScala)
             .aggregate(`yyy-admin-controller`)
-            .aggregate(`yyy-test`)
             .aggregate(`yyy-study`)
             .aggregate(`yyy-spark`)
 

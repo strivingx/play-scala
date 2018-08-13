@@ -2,7 +2,7 @@ package utils
 
 import com.google.inject.Guice
 import com.typesafe.config.ConfigFactory
-import models.Module
+import modules.MyModule
 import slick.jdbc.JdbcBackend.backend.Database
 
 trait DatabaseProvider {
@@ -31,7 +31,7 @@ class DatabaseProviderImpl extends DatabaseProvider {
   */
 object DBUtil extends App {
 
-  val db = Guice.createInjector(new Module()).getInstance(classOf[DatabaseProvider]).getDatabase()
+  val db = Guice.createInjector(new MyModule()).getInstance(classOf[DatabaseProvider]).getDatabase()
 
   override def finalize() {
     db.close()
