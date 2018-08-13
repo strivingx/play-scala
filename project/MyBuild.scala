@@ -65,6 +65,20 @@ object MyBuild extends Build with JavaAppKeys {
                     )
             )
 
+    lazy val `yyy-ssm` = baseProject("yyy-ssm")
+            .dependsOn(`yyy-shared`)
+            .settings(libraryDependencies ++=
+                    excludedDeps(
+                    )
+            )
+
+    lazy val `yyy-algorithm` = baseProject("yyy-algorithm")
+            .dependsOn(`yyy-shared`)
+            .settings(libraryDependencies ++=
+                    excludedDeps(
+                    )
+            )
+
     lazy val root = (project in file(".")).enablePlugins(PlayScala)
             .aggregate(`yyy-admin-controller`)
             .aggregate(`yyy-study`)
