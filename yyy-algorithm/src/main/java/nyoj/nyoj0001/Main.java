@@ -1,4 +1,4 @@
-package nyoj0001;
+package nyoj.nyoj0001;
 
 public class Main {
 }

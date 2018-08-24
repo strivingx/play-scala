@@ -35,7 +35,10 @@ object MyBuild extends Build with JavaAppKeys {
         val scalatest = "org.scalatest" % "scalatest_2.12" % "3.0.5" % "test"
 
         val mockito = "org.mockito" % "mockito-core" % "2.18.3" % Test
-
+        val slf4j_log4j = "org.slf4j" % "slf4j-log4j12" % "1.7.21"
+        val slf4j = "org.slf4j" % "slf4j-api" % "1.7.21"
+        val log4j = "log4j" % "log4j" % "1.2.17"
+        val logback = "ch.qos.logback" % "logback-classic" % "1.1.7"
     }
 
     lazy val `yyy-shared` = baseProject("yyy-shared")
@@ -55,6 +58,9 @@ object MyBuild extends Build with JavaAppKeys {
             .dependsOn(`yyy-shared`)
             .settings(libraryDependencies ++=
                     excludedDeps(
+                        Deps.slf4j,
+                        Deps.slf4j_log4j,
+                        Deps.log4j
                     )
             )
 
