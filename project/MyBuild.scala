@@ -5,6 +5,7 @@ import play.sbt.PlayScala
 import play.sbt.routes.RoutesKeys.routesGenerator
 import sbt.Keys._
 import sbt._
+import io.gatling.sbt.GatlingPlugin
 
 object MyBuild extends Build with JavaAppKeys {
 
@@ -17,6 +18,7 @@ object MyBuild extends Build with JavaAppKeys {
         val redis = "redis.clients" % "jedis" % "2.9.0"
         val play_json = "ai.x" %% "play-json-extensions" % "0.10.0"
         val akka = "com.typesafe.akka" % "akka-actor_2.11" % "2.5.3"
+        val ai_open_api = "com.xiaomi" % "ai-open-api-swift" % "1.0.230"
 
         val play_mailer = Seq("com.typesafe.play" %% "play-mailer" % "6.0.1",
             "com.typesafe.play" %% "play-mailer-guice" % "6.0.1"
@@ -39,6 +41,7 @@ object MyBuild extends Build with JavaAppKeys {
         val slf4j = "org.slf4j" % "slf4j-api" % "1.7.21"
         val log4j = "log4j" % "log4j" % "1.2.17"
         val logback = "ch.qos.logback" % "logback-classic" % "1.1.7"
+
     }
 
     lazy val `yyy-shared` = baseProject("yyy-shared")
@@ -60,7 +63,9 @@ object MyBuild extends Build with JavaAppKeys {
                     excludedDeps(
                         Deps.slf4j,
                         Deps.slf4j_log4j,
-                        Deps.log4j
+                        Deps.log4j,
+                        Deps.ai_open_api
+
                     )
             )
 
@@ -68,6 +73,8 @@ object MyBuild extends Build with JavaAppKeys {
             .dependsOn(`yyy-shared`)
             .settings(libraryDependencies ++=
                     excludedDeps(
+                        "io.gatling.highcharts" % "gatling-charts-highcharts" % "2.2.2" % "test",
+                        "io.gatling" % "gatling-test-framework" % "2.2.2" % "test"
                     )
             )
 
@@ -92,6 +99,7 @@ object MyBuild extends Build with JavaAppKeys {
 
     def playProject(projectName: String) = baseProject(projectName)
             .enablePlugins(PlayScala)
+            .enablePlugins(GatlingPlugin)
             .settings(
                 routesGenerator := InjectedRoutesGenerator
             )
